@@ -1,0 +1,10 @@
+.errorText {
+
+    color: red;
+    font-weight: bold;
+}
+
+.game-board_wrapper {
+    display: flex;
+    flex-direction: column;
+}

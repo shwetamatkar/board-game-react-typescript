@@ -1,0 +1,13 @@
+.heading {
+    color: #0e606b;
+    font-family: "Arial Black";
+    font-size: 5rem;
+    margin-block-end: 0;
+}
+
+.sub-heading {
+    font-size: 2.5rem;
+    font-family: "Arial Black";
+    margin-block-start: 0.2em;
+    color: #0e606b;
+}
