@@ -7,10 +7,12 @@ import Label from '../../atoms/Label/Label';
 const PlayersSection = () => {
   const state = useContext(GameContext);
 
+  const sorter = (a: Player, b: Player) => {
+    return a.name.localeCompare(b.name, undefined, {numeric: true});
+  }
+
   const Player = ({name, field}: Player) => (
     <div className="player">
-
-
       <Label text={name}/>
       <h4>Current Position: {field}</h4>
       {state?.winner?.name === name && <h1 className="winnerText">Winner</h1>}
@@ -20,7 +22,8 @@ const PlayersSection = () => {
 
   return (
     <div className="player-list_container">
-      <div className="player-list_wrapper">{state?.players.map((ele, i) => (<Player {...ele} key={i}/>))}</div>
+      <div className="player-list_wrapper">{state?.players.sort(sorter).map((ele: Player, i: number) => (
+        <Player {...ele} key={i}/>))}</div>
 
       {!state?.winner && <p className="notification">{state?.notification}</p>}
     </div>

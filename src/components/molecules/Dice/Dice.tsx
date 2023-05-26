@@ -5,6 +5,7 @@ import {nextMoveReq, ResType} from "../../../types/types";
 import Label from '../../atoms/Label/Label';
 import Button from "../../atoms/Button/Button";
 import {PATH} from "../../../helpers/constants"
+import {startGame} from "../../../helpers/actions"
 
 const Dice = () => {
   const state = useContext(GameContext);
@@ -46,6 +47,20 @@ const Dice = () => {
       .then(res => setResponse(res))
       .catch(error => console.error(error));
   }
+
+  const setStartResponse = (res: string) => {
+    state?.setUUID(res);
+    state?.setIsStarted(true)
+  }
+
+  const restartNewGame = () => {
+    state?.setPlayers([]);
+    state?.setWinner(null);
+    state?.setNextPlayer(null);
+    state?.setIsStarted(false);
+    startGame(setStartResponse);
+  }
+
   const DiceBlock = () => (
     <div className={`dice_block`}>
       <Label text={diceNumber}/>
@@ -53,7 +68,12 @@ const Dice = () => {
   )
 
   if (state?.winner || !state?.nextPlayer?.name) {
-    return <></>
+    return (
+      <div className="dice-wrapper">
+
+        <Button text="Start New Game" handleClick={restartNewGame}/>
+      </div>
+    )
   }
 
   return (
